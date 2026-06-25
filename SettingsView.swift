@@ -1,4 +1,5 @@
 import SwiftUI
+import ServiceManagement
 
 struct SettingsView: View {
     @AppStorage("excludedApps") private var excludedAppsString: String = ""
@@ -19,6 +20,25 @@ struct SettingsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
+            
+            Toggle("Launch MacClipboard at login", isOn: Binding(
+                get: { SMAppService.mainApp.status == .enabled },
+                set: { newValue in
+                    do {
+                        if newValue {
+                            try SMAppService.mainApp.register()
+                        } else {
+                            try SMAppService.mainApp.unregister()
+                        }
+                    } catch {
+                        print("Failed to change login item status: \(error)")
+                    }
+                }
+            ))
+            .toggleStyle(.switch)
+            
+            Divider()
+            
             Text("Excluded Applications")
                 .font(.headline)
             Text("Copying from these apps will be ignored.")
