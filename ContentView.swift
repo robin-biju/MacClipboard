@@ -124,6 +124,7 @@ struct ContentView: View {
                                 selectedItem == item ? Color.accentColor :
                                 (hoveredItem == item ? Color.gray.opacity(0.2) : Color.clear)
                             )
+                            .animation(.easeInOut(duration: 0.1), value: selectedItem)
                             .onHover { isHovering in
                                 if isHovering {
                                     self.hoveredItem = item
@@ -167,9 +168,11 @@ struct ContentView: View {
                         }
                     }
                 }
+                .animation(.easeInOut(duration: 0.15), value: filteredHistory)
             }
         }
         .frame(width: 400, height: dynamicHeight)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: dynamicHeight)
         .onAppear {
             isSearchFocused = true
             if selectedItem == nil && !filteredHistory.isEmpty {
