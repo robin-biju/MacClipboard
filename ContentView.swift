@@ -187,7 +187,7 @@ struct ContentView: View {
                 }
                 .keyboardShortcut(.defaultAction)
                 
-                // Option+Delete to Remove
+                // Command+Delete to Remove
                 Button("") {
                     if let selected = selectedItem, let index = manager.history.firstIndex(of: selected) {
                         manager.removeItem(selected)
@@ -202,7 +202,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .keyboardShortcut(.delete, modifiers: .option)
+                .keyboardShortcut(.delete, modifiers: .command)
                 
                 // Up Arrow
                 Button("") {

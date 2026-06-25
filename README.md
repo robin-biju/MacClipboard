@@ -10,7 +10,7 @@ Designed and developed by [Robin Biju](https://robinbiju.com).
 
 - **Blazing Fast**: Compiles directly to native Apple Silicon machine code. Consumes virtually 0% CPU while idling in the background.
 - **Fuzzy Search**: Quickly find past copied items instantly using a smart fuzzy search algorithm right from the menu bar.
-- **Keyboard Navigation**: Keep your hands on the keyboard! Use the `Up` and `Down` arrows to navigate your history, hit `Enter` to copy, and `Option + Delete` to instantly remove an item.
+- **Keyboard Navigation**: Keep your hands on the keyboard! Use the `Up` and `Down` arrows to navigate your history, hit `Enter` to copy, and `Command + Delete` to instantly remove an item.
 - **Privacy First (App Exclusions)**: Built-in protection for password managers (like 1Password, Keychain) using standard macOS secure pasteboard flags. You can also manually add specific apps to your exclusion list in the Settings window so their copied text is completely ignored!
 - **Zero Clutter**: Runs entirely in your menu bar. No dock icon, no bloated web frameworks, just a clean, native macOS interface.
 
