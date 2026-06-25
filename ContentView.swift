@@ -163,6 +163,7 @@ struct ContentView: View {
                                 .frame(minWidth: 200, maxWidth: 500, minHeight: 50, maxHeight: 400)
                             }
                             
+                            Divider()
                         }
                     }
                 }
