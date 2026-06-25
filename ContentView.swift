@@ -33,8 +33,8 @@ struct ContentView: View {
         let count = filteredHistory.count
         if count == 0 { return 160 }
         
-        let itemHeight: CGFloat = 33
-        let headerHeight: CGFloat = 90
+        let itemHeight: CGFloat = 29
+        let headerHeight: CGFloat = 86
         let calculated = headerHeight + (CGFloat(count) * itemHeight)
         
         return min(calculated, 700)
@@ -172,7 +172,6 @@ struct ContentView: View {
             }
         }
         .frame(width: 400, height: dynamicHeight)
-        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: dynamicHeight)
         .onAppear {
             isSearchFocused = true
             if selectedItem == nil && !filteredHistory.isEmpty {
