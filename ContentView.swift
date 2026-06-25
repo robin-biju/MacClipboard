@@ -29,6 +29,14 @@ struct ContentView: View {
         return false
     }
     
+    private var dynamicHeight: CGFloat {
+        let count = filteredHistory.count
+        let itemHeight: CGFloat = 34
+        let headerHeight: CGFloat = 110
+        let calculated = headerHeight + (CGFloat(count) * itemHeight)
+        return min(max(calculated, 150), 700)
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -165,7 +173,7 @@ struct ContentView: View {
                 }
             }
         }
-        .frame(width: 400, height: 500)
+        .frame(width: 400, height: dynamicHeight)
         .background(
             ZStack {
                 // Return to Copy
