@@ -103,9 +103,19 @@ struct SettingsView: View {
             }
             .frame(minHeight: 150)
             .border(Color.secondary.opacity(0.2))
+            
+            VStack(spacing: 4) {
+                Text("Designed and developed by")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Link("Robin Biju", destination: URL(string: "https://robinbiju.com")!)
+                    .font(.caption)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 10)
         }
         .padding()
-        .frame(width: 350, height: 450)
+        .frame(width: 350, height: 480)
         .onAppear {
             fetchInstalledApps()
         }

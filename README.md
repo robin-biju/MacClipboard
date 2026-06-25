@@ -2,6 +2,10 @@
 
 A beautifully native, extremely lightweight menu bar clipboard manager for macOS, written in pure Swift and SwiftUI.
 
+## 👨‍💻 Author
+
+Designed and developed by [Robin Biju](https://robinbiju.com).
+
 ## ✨ Features
 
 - **Blazing Fast**: Compiles directly to native Apple Silicon machine code. Consumes virtually 0% CPU while idling in the background.
