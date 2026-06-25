@@ -31,10 +31,13 @@ struct ContentView: View {
     
     private var dynamicHeight: CGFloat {
         let count = filteredHistory.count
-        let itemHeight: CGFloat = 34
-        let headerHeight: CGFloat = 110
+        if count == 0 { return 160 }
+        
+        let itemHeight: CGFloat = 33
+        let headerHeight: CGFloat = 90
         let calculated = headerHeight + (CGFloat(count) * itemHeight)
-        return min(max(calculated, 150), 700)
+        
+        return min(calculated, 700)
     }
     
     var body: some View {
