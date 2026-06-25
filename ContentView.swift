@@ -7,7 +7,7 @@ struct ContentView: View {
     @State private var popoverItem: String?
     @State private var popoverTask: Task<Void, Never>?
     @State private var searchText: String = ""
-    @FocusState private var isFocused: Bool
+    @FocusState private var isSearchFocused: Bool
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openWindow) private var openWindow
     
@@ -84,6 +84,7 @@ struct ContentView: View {
                     .foregroundColor(.secondary)
                 TextField("Search", text: $searchText)
                     .textFieldStyle(PlainTextFieldStyle())
+                    .focused($isSearchFocused)
                 if !searchText.isEmpty {
                     Button(action: {
                         searchText = ""
@@ -162,21 +163,18 @@ struct ContentView: View {
                                 .frame(minWidth: 200, maxWidth: 500, minHeight: 50, maxHeight: 400)
                             }
                             
-                            Divider()
                         }
-                    }
-                }
-                .focusable()
-                .focused($isFocused)
-                .onAppear {
-                    isFocused = true
-                    if selectedItem == nil && !filteredHistory.isEmpty {
-                        selectedItem = filteredHistory.first
                     }
                 }
             }
         }
         .frame(width: 400, height: dynamicHeight)
+        .onAppear {
+            isSearchFocused = true
+            if selectedItem == nil && !filteredHistory.isEmpty {
+                selectedItem = filteredHistory.first
+            }
+        }
         .background(
             ZStack {
                 // Return to Copy
