@@ -46,6 +46,7 @@ struct ContentView: View {
                 .help("Clear History")
                 
                 Button(action: {
+                    NSApplication.shared.activate(ignoringOtherApps: true)
                     openWindow(id: "settings")
                     dismiss()
                 }) {
