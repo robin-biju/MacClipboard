@@ -1,0 +1,9 @@
+# Build artifacts
+MacClipboard.app/
+MacClipboard.zip
+AppIcon.iconset/
+icon.png
+clean_icon.png
+
+# macOS
+.DS_Store
