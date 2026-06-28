@@ -107,8 +107,9 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
             } else {
-                ScrollView {
-                    LazyVStack(spacing: 0) {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(spacing: 0) {
                         ForEach(filteredHistory, id: \.self) { item in
                             HStack {
                                 Text(item)
@@ -167,16 +168,28 @@ struct ContentView: View {
                             Divider()
                         }
                     }
+                    .animation(.easeInOut(duration: 0.15), value: filteredHistory)
+                    .onChange(of: selectedItem) { newItem in
+                        if let newItem = newItem {
+                            withAnimation {
+                                proxy.scrollTo(newItem, anchor: .center)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        if let first = filteredHistory.first {
+                            proxy.scrollTo(first, anchor: .top)
+                        }
+                    }
                 }
-                .animation(.easeInOut(duration: 0.15), value: filteredHistory)
             }
+        }
         }
         .frame(width: 400, height: dynamicHeight)
         .onAppear {
             isSearchFocused = true
-            if selectedItem == nil && !filteredHistory.isEmpty {
-                selectedItem = filteredHistory.first
-            }
+            manager.enforceHistoryLimit()
+            selectedItem = nil
         }
         .background(
             ZStack {

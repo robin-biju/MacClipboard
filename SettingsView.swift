@@ -3,6 +3,7 @@ import ServiceManagement
 
 struct SettingsView: View {
     @AppStorage("excludedApps") private var excludedAppsString: String = ""
+    @AppStorage("maxHistoryCount") private var maxHistoryCount: Int = 50
     @State private var newApp: String = ""
     @State private var availableApps: [String] = []
     @State private var appPaths: [String: String] = [:]
@@ -36,6 +37,20 @@ struct SettingsView: View {
                 }
             ))
             .toggleStyle(.switch)
+            
+            Divider()
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text("History Limit")
+                    .font(.headline)
+                Text("Maximum number of items to save in clipboard history.")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Stepper(value: $maxHistoryCount, in: 1...500) {
+                    Text("\(maxHistoryCount) items")
+                }
+            }
             
             Divider()
             

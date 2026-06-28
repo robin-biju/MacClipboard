@@ -8,7 +8,11 @@ class ClipboardManager: ObservableObject {
     private var lastChangeCount: Int
     private var timer: Timer?
     private let userDefaultsKey = "ClipboardHistory"
-    private let maxHistoryCount = 50
+    
+    var maxHistoryCount: Int {
+        let count = UserDefaults.standard.integer(forKey: "maxHistoryCount")
+        return count > 0 ? count : 50
+    }
     
     init() {
         self.lastChangeCount = pasteboard.changeCount
@@ -72,6 +76,13 @@ class ClipboardManager: ObservableObject {
         }
         
         saveHistory()
+    }
+    
+    func enforceHistoryLimit() {
+        if history.count > maxHistoryCount {
+            history = Array(history.prefix(maxHistoryCount))
+            saveHistory()
+        }
     }
     
     func copyToClipboard(item: String) {
