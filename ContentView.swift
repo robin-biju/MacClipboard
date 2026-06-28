@@ -129,7 +129,6 @@ struct ContentView: View {
                             .onHover { isHovering in
                                 if isHovering {
                                     self.hoveredItem = item
-                                    self.selectedItem = item
                                     popoverTask = Task {
                                         try? await Task.sleep(nanoseconds: 3_000_000_000)
                                         if !Task.isCancelled {
@@ -171,9 +170,7 @@ struct ContentView: View {
                     .animation(.easeInOut(duration: 0.15), value: filteredHistory)
                     .onChange(of: selectedItem) { newItem in
                         if let newItem = newItem {
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                proxy.scrollTo(newItem)
-                            }
+                            proxy.scrollTo(newItem)
                         }
                     }
                     .onAppear {
