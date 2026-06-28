@@ -4,6 +4,7 @@ struct ContentView: View {
     @StateObject private var manager = ClipboardManager()
     @State private var selectedItem: String?
     @State private var hoveredItem: String?
+    @State private var keyboardScrollTarget: String?
     @State private var popoverItem: String?
     @State private var popoverTask: Task<Void, Never>?
     @State private var searchText: String = ""
@@ -129,6 +130,7 @@ struct ContentView: View {
                             .onHover { isHovering in
                                 if isHovering {
                                     self.hoveredItem = item
+                                    self.selectedItem = item
                                     popoverTask = Task {
                                         try? await Task.sleep(nanoseconds: 3_000_000_000)
                                         if !Task.isCancelled {
@@ -168,7 +170,7 @@ struct ContentView: View {
                         }
                     }
                     .animation(.easeInOut(duration: 0.15), value: filteredHistory)
-                    .onChange(of: selectedItem) { newItem in
+                    .onChange(of: keyboardScrollTarget) { newItem in
                         if let newItem = newItem {
                             proxy.scrollTo(newItem)
                         }
@@ -211,6 +213,7 @@ struct ContentView: View {
                         } else {
                             let nextIndex = min(index, items.count - 1)
                             selectedItem = items[nextIndex]
+                            keyboardScrollTarget = items[nextIndex]
                         }
                     }
                 }
@@ -222,9 +225,11 @@ struct ContentView: View {
                     if let current = selectedItem, let index = items.firstIndex(of: current) {
                         if index > 0 {
                             selectedItem = items[index - 1]
+                            keyboardScrollTarget = items[index - 1]
                         }
                     } else if !items.isEmpty {
                         selectedItem = items.first
+                        keyboardScrollTarget = items.first
                     }
                 }
                 .keyboardShortcut(.upArrow, modifiers: [])
@@ -235,9 +240,11 @@ struct ContentView: View {
                     if let current = selectedItem, let index = items.firstIndex(of: current) {
                         if index < items.count - 1 {
                             selectedItem = items[index + 1]
+                            keyboardScrollTarget = items[index + 1]
                         }
                     } else if !items.isEmpty {
                         selectedItem = items.first
+                        keyboardScrollTarget = items.first
                     }
                 }
                 .keyboardShortcut(.downArrow, modifiers: [])
