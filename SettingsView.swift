@@ -47,9 +47,17 @@ struct SettingsView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 
-                Stepper(value: $maxHistoryCount, in: 1...500) {
-                    Text("\(maxHistoryCount) items")
+                Picker("", selection: $maxHistoryCount) {
+                    Text("10 items").tag(10)
+                    Text("20 items").tag(20)
+                    Text("50 items").tag(50)
+                    Text("100 items").tag(100)
+                    Text("200 items").tag(200)
+                    Text("500 items").tag(500)
                 }
+                .pickerStyle(MenuPickerStyle())
+                .frame(width: 150)
+                .labelsHidden()
             }
             
             Divider()

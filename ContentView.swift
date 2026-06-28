@@ -171,8 +171,8 @@ struct ContentView: View {
                     .animation(.easeInOut(duration: 0.15), value: filteredHistory)
                     .onChange(of: selectedItem) { newItem in
                         if let newItem = newItem {
-                            withAnimation {
-                                proxy.scrollTo(newItem, anchor: .center)
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                proxy.scrollTo(newItem)
                             }
                         }
                     }
